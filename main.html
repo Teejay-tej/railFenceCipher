@@ -1,0 +1,109 @@
+<html>  
+    <head>
+        <link rel="stylesheet" href="./main.css"/>
+        </head> 
+<script type="text/javascript">
+    let key=999;
+    var ciphertextnew="";
+  function random( key) //a random function which chooses a number between 2 and key+3
+  { var res=Math.random().toString(36).slice(2, key+3);
+    return res; //this number is returned
+  }
+function Encrypt() {
+    plaintext = document.getElementById("p").value.toLowerCase();  
+    if(plaintext.length < 1){ alert("please enter some plaintext"); return; }    
+     key = parseInt(document.getElementById("key").value);
+     console.log(key)
+    if(isNaN(key))
+    {alert("Please enter key")
+    document.getElementById("c").value=""
+    document.getElementById("r").value=""
+    return;
+}
+ciphertext=""
+    
+
+ 
+    
+    if(key > Math.floor(2*(plaintext.length-1))){ alert("key is too large for the plaintext length."); return; }  
+   
+    for(line=0; line<key-1; line++){
+       skip=2*(key-line-1);   j=0;
+        for(i=line; i<plaintext.length;){
+            ciphertext += plaintext.charAt(i);
+            if((line==0) || (j%2 == 0)) i+=skip;
+           else i+=2*(key-1) - skip;  
+           j++;          
+        }
+    }
+    for(i=line; i<plaintext.length; i+=2*(key-1)) ciphertext += plaintext.charAt(i);
+    ciphertext=random(key)+ciphertext+random(key);
+    console.log(ciphertext);
+    var finaltext=ciphertext
+    ciphertextnew=ciphertext;
+    finaltext=finaltext.replace(/\s+/g, ''); 
+    
+    document.getElementById("c").value = finaltext;
+    document.getElementById("r").value = finaltext;
+    
+}
+
+
+function Decrypt() {
+      ciphertext=ciphertextnew;
+     key = parseInt(document.getElementById("key").value);
+    var length=ciphertext.length;
+   
+    //if(ciphertext.length < 1){ alert("please enter some ciphertext (letters only)"); return; } 
+       ciphertext=ciphertext.slice(key+1,length+1); 
+       length=ciphertext.length;
+      
+       
+       
+       ciphertext=ciphertext.substr(0,length-(key+1));
+     
+       console.log(ciphertext)
+   
+   
+    
+   // if(key > Math.floor(2*(ciphertext.length-1))){ alert("please enter 1 - 22."); return; }      
+    pt = new Array(ciphertext.length);   k=0;
+    for(line=0; line<key-1; line++){
+       skip=2*(key-line-1);  j=0;
+        for(i=line; i<ciphertext.length;){
+            pt[i] = ciphertext.charAt(k++);
+            if((line==0) || (j%2 == 0)) i+=skip;
+           else i+=2*(key-1) - skip;  
+           j++;        
+        }
+    }
+    for(i=line; i<ciphertext.length; i+=2*(key-1)) pt[i] = ciphertext.charAt(k++);
+  
+    document.getElementById("r").value = pt.join("");
+}
+</script>
+<body>
+<div class="topbar">
+</div>
+<h1 style="text-align:center">Rail Fence Cipher </h1>
+<!--<p>Enter the word that you want to ENCRYPT, then put "NUMBER" in a key form to make how many rail you need</p>-->
+<div class="sender">
+<h3>Sender</h3>
+<TEXTAREA id="p" name="p" rows="4" cols="50">attack at dawn</TEXTAREA>
+</div>
+<BR>
+    <div class="receiver">
+        <h3>Receiver</h3>
+        <TEXTAREA id="r" name="r" rows="4" cols="50"></TEXTAREA>
+        </div>
+        <div class="attacker">
+            <h3>Attacker</h3>
+            <TEXTAREA id="c" name="c" rows="4" cols="50"></TEXTAREA>
+            </div>
+<P style="font-size: large;text-align: center;">Enter the zig-zag spacing   <INPUT placeholder="Eg:3"id="key" name="key" size="5" value=" " type="text" style="width:70px;height:30px;"></P>
+<P id="encrypt"><INPUT id="button" name="btnEn" value=" Encryption at sender's end " onclick="Encrypt()" type="button"> </P>
+<P id="decrypt"><INPUT id="button" name="btnDe" value=" Decryption at reciever's end " onclick="Decrypt()" type="button"></P>
+
+
+</body> 
+</html>

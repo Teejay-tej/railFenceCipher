@@ -1,0 +1,70 @@
+.topbar{
+    background-color: #232f3e;
+height: 70px;
+width: 100vw;
+}
+body{
+    margin:0;
+}
+.sender{
+    background-color:#FEBD69;
+width: 30%;
+height: 350px;
+border-radius: 8px;
+position: absolute;
+text-align: center;
+top:11%;
+left:0;
+}
+.receiver{
+    background-color:#FEBD69;
+    width: 30%;
+    height:350px;
+    border-radius: 8px;
+    position: absolute;
+    top: 11%;
+    right:0;
+    text-align: center;
+    }
+    .attacker{
+    background-color:#ffad41;
+    width: 31%;
+    height:350px;
+    border-radius: 8px;
+    position: absolute;
+    bottom:0;
+    left:35%;
+    text-align: center;
+    }
+   #encrypt{
+ margin-left:120px;
+  
+   margin-top: 250px;
+   
+   }
+   #decrypt{
+    position: absolute;
+    right:150px;
+    bottom:230px;
+  
+    
+    }
+   #button{
+   width:200px;
+   padding: 10px;
+   background-color: #ffad41;
+   border:none;
+   border-radius: 6px;
+   cursor:pointer;
+
+   }
+   #button:hover{
+    color: white;
+   }
+   textarea{
+    font-size:14px;
+    text-align: center;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+   }
